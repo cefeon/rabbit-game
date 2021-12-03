@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2600209738308529862}
   - component: {fileID: 4731383073263443055}
-  - component: {fileID: 2856959421451635725}
+  - component: {fileID: 4483046754456929877}
   - component: {fileID: 2600209738308529858}
   - component: {fileID: 2600209738308529859}
   - component: {fileID: 2600209738308529868}
@@ -73,7 +73,7 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   CanCommitToTransform: 1
---- !u!114 &2856959421451635725
+--- !u!114 &4483046754456929877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,6 +85,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b09cf9a06b4244b36577e660f68099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stamina:
+    value: 0
+    maxValue: 8
+    regenerateAmount: 0.01
+  weaponLeftButton: {fileID: 4336947052406258326}
 --- !u!114 &2600209738308529858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +105,7 @@ MonoBehaviour:
   controller: {fileID: 1625792287891663871}
   runSpeed: 25
   animator: {fileID: 5328294383351932981}
+  player: {fileID: 4483046754456929877}
 --- !u!114 &2600209738308529859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1625792287891663871}
-  player: {fileID: 2856959421451635725}
+  player: {fileID: 4483046754456929877}
   force: 10
 --- !u!114 &2600209738308529868
 MonoBehaviour:

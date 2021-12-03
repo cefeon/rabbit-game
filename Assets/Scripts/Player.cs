@@ -1,12 +1,14 @@
 using System;
 using Unity.Netcode;
+using Unity.Netcode.Samples;
 using UnityEngine;
+using Object = System.Object;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour, IAttacker
 {
-        public float Stamina { get; set; } = 8;
-        private float _maxStamina;
-        public float StaminaRegeneration { get; set; } = 0.01f;
+        [SerializeField]
+        private Stat stamina;
+        
         public float Mana { get; set; } = 10;
         public float ManaRegeneration { get; set; } = 0.01f;
         
@@ -26,7 +28,9 @@ public class Player : MonoBehaviour
         
         public float LifeSteal {get; set; } = 10;
 
-        public Player getLocalPlayer()
+        public Weapon weaponLeftButton;
+
+        public Player getLocalPlayerFromAnotherObject()
         {
                 var playerObjects = GameObject.FindGameObjectsWithTag("Player");
                 foreach (var player in playerObjects)
@@ -39,16 +43,19 @@ public class Player : MonoBehaviour
                 return null;
         }
 
-        private void Start()
-        {
-                _maxStamina = Stamina;
-        }
-        
         private void Update()
         {
-                if (Stamina <= _maxStamina)
-                {
-                        Stamina += StaminaRegeneration;
-                }
+                stamina.Regenerate();
+        }
+
+        public void Attack(Weapon weapon)
+        {
+                weapon.Shoot();
+        }
+
+        public Stat Stamina
+        {
+                get => stamina;
+                set => stamina = value;
         }
 }

@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode.Samples;
 using UnityEngine;
 
 public class IceBolt : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
-
     public float speed;
     void Start()
     {
@@ -20,7 +20,11 @@ public class IceBolt : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D thingHitted)
     {
-        Debug.Log(thingHitted.name);
+        if (thingHitted.CompareTag("Enemy"))
+        {
+            thingHitted.GetComponent<Enemy>().Health.add(-100);
+            Debug.Log(thingHitted.GetComponent<Enemy>().Health.value);
+        }
         Destroy(gameObject);
     }
 }

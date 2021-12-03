@@ -14,12 +14,12 @@ public class Dash : NetworkBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && player.Stamina > 0.2) 
+        if (Input.GetKeyDown(KeyCode.Space) && player.Stamina.value > 0.2) 
         {
             _isDashing = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) || player.Stamina < 0.2)
+        if (Input.GetKeyUp(KeyCode.Space) || player.Stamina.value < 0.2)
         {
             _isDashing = false;
         }
@@ -33,6 +33,6 @@ public class Dash : NetworkBehaviour
         if (!_isDashing) return;
         var facingRight = controller.FacingRight;
         transform.position += new Vector3(force * (-1 + Convert.ToInt32(facingRight) * +2) * Time.deltaTime, 0f, 0f);
-        player.Stamina -= Cost;
+        player.Stamina.value -= Cost;
     }
 }
