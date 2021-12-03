@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1625792287891663871}
-  runSpeed: 40
+  runSpeed: 25
   animator: {fileID: 5328294383351932981}
 --- !u!114 &2600209738308529859
 MonoBehaviour:
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1625792287891663871}
   player: {fileID: 2856959421451635725}
-  force: 15
+  force: 10
 --- !u!114 &2600209738308529868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,21 +165,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 400
-  crouchSpeed: 0.36
   movementSmoothing: 0.05
   airControl: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
   groundCheck: {fileID: 2600209740417131471}
-  ceilingCheck: {fileID: 2600209738344437353}
-  crouchDisableCollider: {fileID: 0}
-  IsGrounded: 0
-  CurrentRigidbody: {fileID: 2547997648196869205}
+  isGrounded: 0
+  currentRigidbody: {fileID: 2547997648196869205}
   onLandEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!61 &568977624523511851

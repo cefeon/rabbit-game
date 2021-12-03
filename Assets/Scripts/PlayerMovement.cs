@@ -27,7 +27,7 @@ public class PlayerMovement : NetworkBehaviour {
 	{
 		if (!controller.IsLocalPlayer) return;
 		var targetVelocity = new Vector2(_horizontalMove * Time.fixedDeltaTime * 10f,
-			controller.CurrentRigidbody.velocity.y);
+			controller.currentRigidbody.velocity.y);
 		controller.Move(targetVelocity);
 		controller.IsJumping = false;
 	}

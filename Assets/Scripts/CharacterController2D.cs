@@ -15,8 +15,8 @@ public class CharacterController2D : NetworkBehaviour
 	[SerializeField] 
 	private Transform groundCheck;
 	private const float GroundedRadius = .2f;
-	public bool IsGrounded;
-	public Rigidbody2D CurrentRigidbody;
+	public bool isGrounded;
+	public Rigidbody2D currentRigidbody;
 	private Vector3 _velocity = Vector3.zero;
 	[Header("Events")]
 	[Space]
@@ -26,8 +26,6 @@ public class CharacterController2D : NetworkBehaviour
 
 	[System.Serializable]
 	public class BoolEvent : UnityEvent<bool> { }
-
-	[SerializeField]
 	public bool FacingRight { get; set; } = true;
 	public bool IsJumping { get; set; }
 
@@ -38,7 +36,7 @@ public class CharacterController2D : NetworkBehaviour
 		{
 			if (player.GetComponent<NetworkObject>().IsLocalPlayer)
 			{
-				CurrentRigidbody = GetComponent<Rigidbody2D>();
+				currentRigidbody = GetComponent<Rigidbody2D>();
 			}
 		}
 	}
@@ -50,14 +48,14 @@ public class CharacterController2D : NetworkBehaviour
 
 	private void FixedUpdate()
 	{
-		var wasGrounded = IsGrounded;
-		IsGrounded = false;
+		var wasGrounded = isGrounded;
+		isGrounded = false;
 		var colliders = Physics2D.OverlapCircleAll(groundCheck.position, GroundedRadius, whatIsGround);
 		foreach (var t in colliders)
 		{
 			if (t.gameObject != gameObject)
 			{
-				IsGrounded = true;
+				isGrounded = true;
 				if (!wasGrounded)
 				{
 					onLandEvent.Invoke();
@@ -68,10 +66,10 @@ public class CharacterController2D : NetworkBehaviour
 
 	public void Move(Vector2 targetVelocity)
 	{
-		if (!IsGrounded && !airControl) return;
+		if (!isGrounded && !airControl) return;
 		var horizontalVelocity = targetVelocity.x;
-		var velocity = CurrentRigidbody.velocity;
-		CurrentRigidbody.velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref _velocity, movementSmoothing);
+		var velocity = currentRigidbody.velocity;
+		currentRigidbody.velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref _velocity, movementSmoothing);
 
 		if (horizontalVelocity > 0 && !FacingRight)
 		{
@@ -81,7 +79,7 @@ public class CharacterController2D : NetworkBehaviour
 		{
 			Flip();
 		}
-		if (IsGrounded && IsJumping)
+		if (isGrounded && IsJumping)
 		{
 			Jump();
 		}
@@ -89,8 +87,8 @@ public class CharacterController2D : NetworkBehaviour
 
 	private void Jump()
 	{
-		IsGrounded = false;
-		CurrentRigidbody.AddForce(Vector2.up * jumpForce);
+		isGrounded = false;
+		currentRigidbody.AddForce(Vector2.up * jumpForce);
 	}
 
 	private void Flip()

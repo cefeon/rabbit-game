@@ -9,7 +9,7 @@ public class Slingshot:MonoBehaviour
     public CharacterController2D controller;
 
     [SerializeField]
-    private int _shootForce;
+    private int shootForce;
     
     private void Awake()
     {
@@ -18,13 +18,9 @@ public class Slingshot:MonoBehaviour
     
     private void OnMouseDown()
         {
-            try
+            if (Camera.main)
             {
                 _originalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            }
-            catch (NullReferenceException error)
-            {
-                Debug.Log("No camera set " + error);
             }
 
             Debug.Log("original:" + _originalPosition);
@@ -32,13 +28,9 @@ public class Slingshot:MonoBehaviour
 
         private void OnMouseDrag()
         {
-            try
+            if (Camera.main)
             {
                 _draggedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            } 
-            catch (NullReferenceException error)
-            {
-                Debug.Log("No camera set" + error);
             }
 
             Debug.Log("dragged:" + _draggedPosition);
@@ -47,6 +39,6 @@ public class Slingshot:MonoBehaviour
         private void OnMouseUp()
         {
             var shootVector = _originalPosition - _draggedPosition;
-            controller.Move(shootVector * _shootForce * 10);
+            controller.Move(shootVector * shootForce * 10);
         }
 }
