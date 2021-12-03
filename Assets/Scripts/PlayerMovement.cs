@@ -21,16 +21,6 @@ public class PlayerMovement : NetworkBehaviour {
 		{
 			controller.IsJumping = true;
 		}
-
-		if (Input.GetButtonDown("Crouch"))
-		{
-			controller.IsCrouching = true;
-		}
-		else if (Input.GetButtonUp("Crouch"))
-		{
-			controller.IsCrouching = false;
-		}
-		
 	}
 
 	private void FixedUpdate ()
